@@ -1,5 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getKnownMethodData } from '../selectors/selectors';
+import { useEffect, useRef, useState } from 'react';
+import {
+  TransactionStatus,
+  TransactionType,
+} from '@metamask/transaction-controller';
+import {
+  getDetectedTokensInCurrentNetwork,
+  getKnownMethodData,
+  getTokenList,
+} from '../selectors/selectors';
 import {
   getStatusKey,
   getTransactionTypeTitle,
@@ -7,6 +16,7 @@ import {
 import { camelCaseToCapitalize } from '../helpers/utils/common.util';
 import { PRIMARY, SECONDARY } from '../helpers/constants/common';
 import {
+  getAssetDetails,
   getTokenAddressParam,
   getTokenIdParam,
 } from '../helpers/utils/token-util';
@@ -21,11 +31,7 @@ import {
   TOKEN_CATEGORY_HASH,
 } from '../helpers/constants/transactions';
 import { getNfts, getTokens } from '../ducks/metamask/metamask';
-import {
-  TransactionType,
-  TransactionGroupCategory,
-  TransactionStatus,
-} from '../../shared/constants/transaction';
+import { TransactionGroupCategory } from '../../shared/constants/transaction';
 import { captureSingleException } from '../store/actions';
 import { isEqualCaseInsensitive } from '../../shared/modules/string-utils';
 import { getTokenValueParam } from '../../shared/lib/metamask-controller-utils';
@@ -93,6 +99,8 @@ export function useTransactionDisplayData(transactionGroup) {
   const currentAsset = useCurrentAsset();
   const knownTokens = useSelector(getTokens);
   const knownNfts = useSelector(getNfts);
+  const detectedTokens = useSelector(getDetectedTokensInCurrentNetwork) || [];
+  const tokenList = useSelector(getTokenList);
   const t = useI18nContext();
 
   const { initialTransaction, primaryTransaction } = transactionGroup;
@@ -109,6 +117,7 @@ export function useTransactionDisplayData(transactionGroup) {
   const displayedStatusKey = getStatusKey(primaryTransaction);
   const isPending = displayedStatusKey in PENDING_STATUS_HASH;
   const isSubmitted = displayedStatusKey === TransactionStatus.submitted;
+  const mounted = useRef(true);
 
   const primaryValue = primaryTransaction.txParams?.value;
   const date = formatDateWithYearContext(initialTransaction.time);
@@ -121,18 +130,62 @@ export function useTransactionDisplayData(transactionGroup) {
   // This value is used to determine whether we should look inside txParams.data
   // to pull out and render token related information
   const isTokenCategory = TOKEN_CATEGORY_HASH[type];
-
   // these values are always instantiated because they are either
   // used by or returned from hooks. Hooks must be called at the top level,
   // so as an additional safeguard against inappropriately associating token
   // transfers, we pass an additional argument to these hooks that will be
   // false for non-token transactions. This additional argument forces the
   // hook to return null
-  const token =
-    isTokenCategory &&
-    knownTokens.find(({ address }) =>
-      isEqualCaseInsensitive(address, recipientAddress),
-    );
+  let token = null;
+  const [currentAssetDetails, setCurrentAssetDetails] = useState(null);
+
+  if (isTokenCategory) {
+    token =
+      knownTokens.find(({ address }) =>
+        isEqualCaseInsensitive(address, recipientAddress),
+      ) ||
+      detectedTokens.find(({ address }) =>
+        isEqualCaseInsensitive(address, recipientAddress),
+      ) ||
+      tokenList[recipientAddress.toLowerCase()];
+  }
+  useEffect(() => {
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
+  useEffect(() => {
+    async function getAndSetAssetDetails() {
+      if (isTokenCategory && !token) {
+        const assetDetails = await getAssetDetails(
+          to,
+          senderAddress,
+          initialTransaction?.txParams?.data,
+          knownNfts,
+        );
+        if (mounted.current === true) {
+          setCurrentAssetDetails(assetDetails);
+        }
+      }
+    }
+    getAndSetAssetDetails();
+  }, [
+    isTokenCategory,
+    token,
+    recipientAddress,
+    senderAddress,
+    initialTransaction?.txParams?.data,
+    knownNfts,
+    to,
+    mounted,
+  ]);
+  if (currentAssetDetails) {
+    token = {
+      address: currentAssetDetails.toAddress,
+      symbol: currentAssetDetails.symbol,
+      decimals: currentAssetDetails.decimals,
+    };
+  }
 
   const tokenData = useTokenData(
     initialTransaction?.txParams?.data,
@@ -154,7 +207,7 @@ export function useTransactionDisplayData(transactionGroup) {
     );
 
   const tokenDisplayValue = useTokenDisplayValue(
-    initialTransaction?.txParams?.data,
+    primaryTransaction?.txParams?.data,
     token,
     isTokenCategory,
   );
@@ -213,6 +266,33 @@ export function useTransactionDisplayData(transactionGroup) {
     } else {
       prefix = '-';
     }
+  } else if (type === TransactionType.swapAndSend) {
+    const isSenderTokenRecipient =
+      initialTransaction.swapAndSendRecipient === senderAddress;
+
+    recipientAddress = initialTransaction.swapAndSendRecipient;
+
+    category = TransactionGroupCategory.swapAndSend;
+    title = t('sendTokenAsToken', [
+      initialTransaction.sourceTokenSymbol,
+      initialTransaction.destinationTokenSymbol,
+    ]);
+    subtitle = origin;
+    subtitleContainsOrigin = true;
+    primarySuffix =
+      isViewingReceivedTokenFromSwap && isSenderTokenRecipient
+        ? currentAsset.symbol
+        : initialTransaction.sourceTokenSymbol;
+    primaryDisplayValue = swapTokenValue;
+    secondaryDisplayValue = swapTokenFiatAmount;
+
+    if (isNegative) {
+      prefix = '';
+    } else if (isViewingReceivedTokenFromSwap && isSenderTokenRecipient) {
+      prefix = '+';
+    } else {
+      prefix = '-';
+    }
   } else if (type === TransactionType.swapApproval) {
     category = TransactionGroupCategory.approval;
     title = t('swapApproval', [primaryTransaction.sourceTokenSymbol]);
@@ -231,6 +311,12 @@ export function useTransactionDisplayData(transactionGroup) {
     category = TransactionGroupCategory.approval;
     prefix = '';
     title = t('setApprovalForAllTitle', [token?.symbol || t('token')]);
+    subtitle = origin;
+    subtitleContainsOrigin = true;
+  } else if (type === TransactionType.tokenMethodIncreaseAllowance) {
+    category = TransactionGroupCategory.approval;
+    prefix = '';
+    title = t('approveIncreaseAllowance', [token?.symbol || t('token')]);
     subtitle = origin;
     subtitleContainsOrigin = true;
   } else if (type === TransactionType.contractInteraction) {
@@ -308,7 +394,8 @@ export function useTransactionDisplayData(transactionGroup) {
     recipientAddress,
     secondaryCurrency:
       (isTokenCategory && !tokenFiatAmount) ||
-      (type === TransactionType.swap && !swapTokenFiatAmount)
+      ([TransactionType.swap, TransactionType.swapAndSend].includes(type) &&
+        !swapTokenFiatAmount)
         ? undefined
         : secondaryCurrency,
     displayedStatusKey,

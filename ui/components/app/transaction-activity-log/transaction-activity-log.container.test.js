@@ -1,3 +1,6 @@
+import { CHAIN_IDS } from '../../../../shared/constants/network';
+import { mockNetworkState } from '../../../../test/stub/networks';
+
 /* eslint-disable import/unambiguous */
 let mapStateToProps;
 
@@ -15,12 +18,16 @@ describe('TransactionActivityLog container', () => {
     it('should return the correct props', () => {
       const mockState = {
         metamask: {
-          conversionRate: 280.45,
-          nativeCurrency: 'ETH',
-          frequentRpcListDetail: [],
-          provider: {
-            ticker: 'ETH',
+          currencyRates: {
+            ETH: {
+              conversionRate: 280.45,
+            },
           },
+
+          ...mockNetworkState({
+            chainId: CHAIN_IDS.MAINNET,
+            blockExplorerUrl: undefined,
+          }),
         },
       };
 
@@ -34,20 +41,16 @@ describe('TransactionActivityLog container', () => {
     it('should return the correct props when on a custom network', () => {
       const mockState = {
         metamask: {
-          conversionRate: 280.45,
-          nativeCurrency: 'ETH',
-          frequentRpcListDetail: [
-            {
-              rpcUrl: 'https://customnetwork.com/',
-              rpcPrefs: {
-                blockExplorerUrl: 'https://customblockexplorer.com/',
-              },
+          currencyRates: {
+            ETH: {
+              conversionRate: 280.45,
             },
-          ],
-          provider: {
-            rpcUrl: 'https://customnetwork.com/',
-            ticker: 'ETH',
           },
+          ...mockNetworkState({
+            chainId: CHAIN_IDS.MAINNET,
+            rpcUrl: 'https://customnetwork.com/',
+            blockExplorerUrl: 'https://customblockexplorer.com/',
+          }),
         },
       };
 

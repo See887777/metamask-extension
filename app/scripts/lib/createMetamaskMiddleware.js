@@ -1,5 +1,8 @@
-import { createScaffoldMiddleware, mergeMiddleware } from 'json-rpc-engine';
-import { createWalletMiddleware } from 'eth-json-rpc-middleware';
+import {
+  createScaffoldMiddleware,
+  mergeMiddleware,
+} from '@metamask/json-rpc-engine';
+import { createWalletMiddleware } from '@metamask/eth-json-rpc-middleware';
 import {
   createPendingNonceMiddleware,
   createPendingTxMiddleware,
@@ -9,7 +12,6 @@ export default function createMetamaskMiddleware({
   version,
   getAccounts,
   processTransaction,
-  processEthSignMessage,
   processTypedMessage,
   processTypedMessageV3,
   processTypedMessageV4,
@@ -27,7 +29,6 @@ export default function createMetamaskMiddleware({
     createWalletMiddleware({
       getAccounts,
       processTransaction,
-      processEthSignMessage,
       processTypedMessage,
       processTypedMessageV3,
       processTypedMessageV4,

@@ -1,26 +1,25 @@
 import React from 'react';
 import * as reactRedux from 'react-redux';
+import { Provider } from 'react-redux';
 import { renderHook } from '@testing-library/react-hooks';
 import sinon from 'sinon';
 import { MemoryRouter } from 'react-router-dom';
-import transactions from '../../test/data/transaction-data.json';
 import {
-  getPreferences,
-  getShouldShowFiat,
-  getCurrentCurrency,
-  getCurrentChainId,
-} from '../selectors';
-import { getTokens, getNativeCurrency } from '../ducks/metamask/metamask';
-import { getMessage } from '../helpers/utils/i18n-helper';
+  TransactionStatus,
+  TransactionType,
+} from '@metamask/transaction-controller';
+import mockState from '../../test/data/mock-state.json';
+import configureStore from '../store/store';
+import transactions from '../../test/data/transaction-data.json';
+// TODO: Remove restricted import
+// eslint-disable-next-line import/no-restricted-paths
 import messages from '../../app/_locales/en/messages.json';
 import { ASSET_ROUTE, DEFAULT_ROUTE } from '../helpers/constants/routes';
-import { CHAIN_IDS } from '../../shared/constants/network';
-import {
-  TransactionType,
-  TransactionGroupCategory,
-  TransactionStatus,
-} from '../../shared/constants/transaction';
+import { TransactionGroupCategory } from '../../shared/constants/transaction';
 import { formatDateWithYearContext } from '../helpers/utils/util';
+import { getMessage } from '../helpers/utils/i18n-helper';
+import { mockNetworkState } from '../../test/stub/networks';
+import { CHAIN_IDS } from '../../shared/constants/network';
 import * as i18nhooks from './useI18nContext';
 import * as useTokenFiatAmountHooks from './useTokenFiatAmount';
 import { useTransactionDisplayData } from './useTransactionDisplayData';
@@ -29,7 +28,7 @@ const expectedResults = [
   {
     title: 'Send',
     category: TransactionGroupCategory.send,
-    subtitle: 'To: 0xffe...1a97',
+    subtitle: 'To: 0xffe5b...91a97',
     subtitleContainsOrigin: false,
     date: formatDateWithYearContext(1589314601567),
     primaryCurrency: '-1 ETH',
@@ -43,7 +42,7 @@ const expectedResults = [
   {
     title: 'Send',
     category: TransactionGroupCategory.send,
-    subtitle: 'To: 0x0cc...8848',
+    subtitle: 'To: 0x0ccc8...f8848',
     subtitleContainsOrigin: false,
     date: formatDateWithYearContext(1589314355872),
     primaryCurrency: '-2 ETH',
@@ -56,7 +55,7 @@ const expectedResults = [
   {
     title: 'Send',
     category: TransactionGroupCategory.send,
-    subtitle: 'To: 0xffe...1a97',
+    subtitle: 'To: 0xffe5b...91a97',
     subtitleContainsOrigin: false,
     date: formatDateWithYearContext(1589314345433),
     primaryCurrency: '-2 ETH',
@@ -69,7 +68,7 @@ const expectedResults = [
   {
     title: 'Receive',
     category: TransactionGroupCategory.receive,
-    subtitle: 'From: 0x31b...4523',
+    subtitle: 'From: 0x31b98...84523',
     subtitleContainsOrigin: false,
     date: formatDateWithYearContext(1589314295000),
     primaryCurrency: '18.75 ETH',
@@ -82,7 +81,7 @@ const expectedResults = [
   {
     title: 'Receive',
     category: TransactionGroupCategory.receive,
-    subtitle: 'From: 0x9ec...a149',
+    subtitle: 'From: 0x9eca6...6a149',
     subtitleContainsOrigin: false,
     date: formatDateWithYearContext(1588972833000),
     primaryCurrency: '0 ETH',
@@ -95,7 +94,7 @@ const expectedResults = [
   {
     title: 'Receive',
     category: TransactionGroupCategory.receive,
-    subtitle: 'From: 0xee0...febb',
+    subtitle: 'From: 0xee014...efebb',
     subtitleContainsOrigin: false,
     date: formatDateWithYearContext(1585087013000),
     primaryCurrency: '1 ETH',
@@ -134,7 +133,7 @@ const expectedResults = [
   {
     title: 'Safe transfer from',
     category: TransactionGroupCategory.send,
-    subtitle: 'To: 0xe7d...dd98',
+    subtitle: 'To: 0xe7d52...0dd98',
     subtitleContainsOrigin: true,
     primaryCurrency: '-0 ETH',
     senderAddress: '0x806627172af48bd5b0765d3449a7def80d6576ff',
@@ -143,16 +142,92 @@ const expectedResults = [
     isPending: false,
     displayedStatusKey: TransactionStatus.confirmed,
   },
+  {
+    title: 'Approve ABC spending cap',
+    category: TransactionGroupCategory.approval,
+    subtitle: `metamask.github.io`,
+    subtitleContainsOrigin: true,
+    primaryCurrency: '0.00000000000005 ABC',
+    senderAddress: '0xe18035bf8712672935fdb4e5e431b1a0183d2dfc',
+    recipientAddress: '0xabca64466f257793eaa52fcfff5066894b76a149',
+    secondaryCurrency: undefined,
+    displayedStatusKey: TransactionStatus.confirmed,
+    isPending: false,
+  },
+  {
+    title: 'Send BAT as ETH',
+    category: TransactionType.swapAndSend,
+    subtitle: 'metamask',
+    subtitleContainsOrigin: true,
+    date: formatDateWithYearContext(1585088013000),
+    primaryCurrency: '-33.425656732428330864 BAT',
+    senderAddress: '0x0a985a957b490f4d05bef05bc7ec556dd8535946',
+    recipientAddress: '0xc6f6ca03d790168758285264bcbf7fb30d27322b',
+    secondaryCurrency: undefined,
+    isPending: false,
+    displayedStatusKey: TransactionStatus.confirmed,
+  },
+  {
+    title: 'Send USDC as DAI',
+    category: TransactionType.swapAndSend,
+    subtitle: 'metamask',
+    subtitleContainsOrigin: true,
+    date: formatDateWithYearContext(1585088013000),
+    primaryCurrency: '-5 USDC',
+    senderAddress: '0x141d32a89a1e0a5ef360034a2f60a4b917c18838',
+    recipientAddress: '0x141d32a89a1e0a5ef360034a2f60a4b917c18838',
+    secondaryCurrency: undefined,
+    isPending: false,
+    displayedStatusKey: TransactionStatus.confirmed,
+  },
+  {
+    title: 'Send BNB as USDC',
+    category: TransactionType.swapAndSend,
+    subtitle: 'metamask',
+    subtitleContainsOrigin: true,
+    date: formatDateWithYearContext(1585088013000),
+    primaryCurrency: '-0.05 BNB',
+    senderAddress: '0x141d32a89a1e0a5ef360034a2f60a4b917c18838',
+    recipientAddress: '0x141d32a89a1e0a5ef360034a2f60a4b917c18838',
+    secondaryCurrency: undefined,
+    isPending: false,
+    displayedStatusKey: TransactionStatus.confirmed,
+  },
 ];
 
-let useSelector, useI18nContext, useTokenFiatAmount;
+let useI18nContext, useTokenFiatAmount;
 
 const renderHookWithRouter = (cb, tokenAddress) => {
   const initialEntries = [
     tokenAddress ? `${ASSET_ROUTE}/${tokenAddress}` : DEFAULT_ROUTE,
   ];
+
+  const defaultState = {
+    ...mockState,
+    metamask: {
+      ...mockState.metamask,
+      completeOnboarding: true,
+      ...mockNetworkState({ chainId: CHAIN_IDS.MAINNET }),
+      currentCurrency: 'ETH',
+      useCurrencyRateCheck: false, // to force getShouldShowFiat to return false
+      preferences: {
+        getShowFiatInTestnets: false,
+      },
+      allNfts: [],
+      tokens: [
+        {
+          address: '0xabca64466f257793eaa52fcfff5066894b76a149',
+          symbol: 'ABC',
+          decimals: 18,
+        },
+      ],
+    },
+  };
+
   const wrapper = ({ children }) => (
-    <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
+    <MemoryRouter initialEntries={initialEntries}>
+      <Provider store={configureStore(defaultState)}>{children}</Provider>
+    </MemoryRouter>
   );
   return renderHook(cb, { wrapper });
 };
@@ -161,42 +236,15 @@ describe('useTransactionDisplayData', () => {
   const dispatch = sinon.spy();
 
   beforeAll(() => {
-    useSelector = sinon.stub(reactRedux, 'useSelector');
     useTokenFiatAmount = sinon.stub(
       useTokenFiatAmountHooks,
       'useTokenFiatAmount',
     );
-    useTokenFiatAmount.returns((tokenAddress) => {
-      return tokenAddress ? '1 TST' : undefined;
-    });
+    useTokenFiatAmount.returns(undefined);
     useI18nContext = sinon.stub(i18nhooks, 'useI18nContext');
     useI18nContext.returns((key, variables) =>
       getMessage('en', messages, key, variables),
     );
-    useSelector.callsFake((selector) => {
-      if (selector === getTokens) {
-        return [
-          {
-            address: '0xabca64466f257793eaa52fcfff5066894b76a149',
-            symbol: 'ABC',
-            decimals: 18,
-          },
-        ];
-      } else if (selector === getPreferences) {
-        return {
-          useNativeCurrencyAsPrimaryCurrency: true,
-        };
-      } else if (selector === getShouldShowFiat) {
-        return false;
-      } else if (selector === getNativeCurrency) {
-        return 'ETH';
-      } else if (selector === getCurrentCurrency) {
-        return 'ETH';
-      } else if (selector === getCurrentChainId) {
-        return CHAIN_IDS.MAINNET;
-      }
-      return null;
-    });
     sinon.stub(reactRedux, 'useDispatch').returns(dispatch);
   });
 

@@ -4,14 +4,14 @@ import {
   BackgroundColor,
   SEVERITIES,
   TextColor,
-  TypographyVariant,
+  TextVariant,
+  FontWeight,
 } from '../../../helpers/constants/design-system';
 import Card from '../card';
-import Typography from '../typography';
 import Box from '../box';
+import { Text } from '../../component-library';
 
 import README from './README.mdx';
-
 import Approve from './approve-icon.component';
 import InfoIcon from './info-icon.component';
 import InfoIconInverted from './info-icon-inverted.component';
@@ -22,9 +22,6 @@ import SendIcon from './send-icon.component';
 import Sign from './sign-icon.component';
 import SunCheck from './sun-check-icon.component';
 import Swap from './swap-icon-for-list.component';
-import IconCheck from './icon-check';
-import IconCog from './icon-cog';
-import IconImport from './icon-import';
 import IconEye from './icon-eye';
 import IconEyeSlash from './icon-eye-slash';
 import IconTokenSearch from './icon-token-search';
@@ -78,7 +75,7 @@ const IconItem = ({ Component }) => {
       backgroundColor={BackgroundColor.backgroundDefault}
     >
       <Box marginBottom={2}>{Component}</Box>
-      <code>{`${Component.type.__docgenInfo.displayName}`}</code>
+      <code>{`${Component.type.name}`}</code>
     </Card>
   );
 };
@@ -89,26 +86,28 @@ IconItem.propTypes = {
 
 export const DefaultStory = (args) => (
   <div>
-    <Typography
-      variant={TypographyVariant.H2}
+    <Text
+      variant={TextVariant.headingLg}
+      fontWeight={FontWeight.Normal}
       color={TextColor.errorDefault}
-      boxProps={{ marginBottom: 4 }}
+      marginBottom={4}
     >
       DEPRECATED
-    </Typography>
-    <Typography variant={TypographyVariant.H2} boxProps={{ marginBottom: 4 }}>
-      Icons
-    </Typography>
-    <Typography
-      variant={TypographyVariant.paragraph}
-      boxProps={{ marginBottom: 4 }}
+    </Text>
+    <Text
+      variant={TextVariant.headingLg}
+      fontWeight={FontWeight.Normal}
+      marginBottom={4}
     >
+      Icons
+    </Text>
+    <Text variant={TextVariant.bodyMd} marginBottom={4}>
       To ensure correct licensing we suggest you use an icon from the
       @fortawesome/fontawesome-free: ^5.13.0 package. If there is no icon to
       suit your needs and you need to create a new one. Ensure that it has the
       correct licensing or has been created in house from scratch. Please use
       the ./icon-caret-left.js as the template.
-    </Typography>
+    </Text>
     <Box marginBottom={4}>
       <div
         style={{
@@ -117,9 +116,6 @@ export const DefaultStory = (args) => (
           gridTemplateColumns: 'repeat(auto-fill, 176px)',
         }}
       >
-        <IconItem Component={<IconCheck {...args} />} />
-        <IconItem Component={<IconImport {...args} />} />
-        <IconItem Component={<IconCog {...args} />} />
         <IconItem Component={<IconTokenSearch {...args} />} />
         <IconItem Component={<SearchIcon {...args} />} />
       </div>

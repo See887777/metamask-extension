@@ -79,15 +79,6 @@
   "asset": {
     "message": "الأصل"
   },
-  "attemptToCancel": {
-    "message": "هل تحاول الإلغاء؟"
-  },
-  "attemptToCancelDescription": {
-    "message": "تقديم هذه المحاولة لا يضمن أنه سيتم إلغاء معاملتك الأصلية. إذا نجحت محاولة الإلغاء ، فسيتم فرض رسوم المعاملة المذكورة أعلاه."
-  },
-  "attemptingConnect": {
-    "message": "محاولة الاتصال بسلسلة الكتل."
-  },
   "attributions": {
     "message": "الصفات"
   },
@@ -102,9 +93,6 @@
   },
   "back": {
     "message": "الرجوع إلى الوراء"
-  },
-  "backToAll": {
-    "message": "العودة إلى الجميع"
   },
   "backupApprovalInfo": {
     "message": "هذا الرمز السري مطلوب لاسترداد محفظتك في حالة فقد جهازك أو نسيان كلمة مرورك أو إعادة تثبيت MetaMask أو الرغبة في الوصول إلى محفظتك عبر جهاز آخر."
@@ -134,20 +122,11 @@
   "browserNotSupported": {
     "message": "متصفحك غير مدعوم..."
   },
-  "buyWithWyre": {
-    "message": "قم بشراء عملة إيثير بواسطة Wyre"
-  },
-  "buyWithWyreDescription": {
-    "message": "يتيح لك Wyre استخدام بطاقة ائتمان لإيداع 1$ مباشرة في حساب MetaMask الخاص بك."
-  },
   "bytes": {
     "message": "بايتات"
   },
   "cancel": {
     "message": "إلغاء"
-  },
-  "cancellationGasFee": {
-    "message": "رسوم الإلغاء بعملة جاس"
   },
   "cancelled": {
     "message": "تم الإلغاء"
@@ -173,20 +152,17 @@
   "connect": {
     "message": "اتصال"
   },
-  "connectHardwareWallet": {
-    "message": "ربط محفظة الأجهزة"
-  },
   "connectingTo": {
     "message": "جارِ الاتصال بـ $1"
   },
   "connectingToGoerli": {
     "message": "الاتصال بشبكة اختبار Goerli"
   },
+  "connectingToLineaGoerli": {
+    "message": "الاتصال بشبكة اختبار Linea Goerli"
+  },
   "connectingToMainnet": {
     "message": "جارِ الاتصال بشبكة إيثيريوم الرئيسية"
-  },
-  "continueToWyre": {
-    "message": "الاستمرار إلى Wyre"
   },
   "contractDeployment": {
     "message": "نشر العقد"
@@ -200,9 +176,6 @@
   "copyAddress": {
     "message": "نسخ العنوان إلى الحافظة"
   },
-  "copyPrivateKey": {
-    "message": "هذا هو مفتاحك الخاص (انقر للنسخ)"
-  },
   "copyToClipboard": {
     "message": "نسخ إلى الحافظة"
   },
@@ -211,9 +184,6 @@
   },
   "create": {
     "message": "إنشاء"
-  },
-  "createAccount": {
-    "message": "إنشاء حساب"
   },
   "createPassword": {
     "message": "إنشاء كلمة مرور"
@@ -239,15 +209,6 @@
   "delete": {
     "message": "حذف"
   },
-  "deleteAccount": {
-    "message": "حذف الحساب"
-  },
-  "deleteNetwork": {
-    "message": "هل تريد حذف الشبكة؟"
-  },
-  "deleteNetworkDescription": {
-    "message": "هل أنت متأكد أنك تريد حذف هذه الشبكة؟"
-  },
   "details": {
     "message": "التفاصيل"
   },
@@ -269,15 +230,6 @@
   "editContact": {
     "message": "تعديل جهة الاتصال"
   },
-  "ensNotFoundOnCurrentNetwork": {
-    "message": "لم يتم العثور على اسم ENS على الشبكة الحالية. حاول التبديل إلى شبكة الإيثيريوم الرئيسية."
-  },
-  "ensRegistrationError": {
-    "message": "خطأ في تسجيل اسم ENS"
-  },
-  "enterPassword": {
-    "message": "أدخل كلمة مرور"
-  },
   "enterPasswordContinue": {
     "message": "أدخل كلمة المرور للمتابعة"
   },
@@ -289,9 +241,6 @@
   },
   "expandView": {
     "message": "توسيع العرض"
-  },
-  "exportPrivateKey": {
-    "message": "تصدير المفتاح الخاص"
   },
   "failed": {
     "message": "فشل"
@@ -335,13 +284,6 @@
   },
   "general": {
     "message": "عام"
-  },
-  "getEther": {
-    "message": "احصل على إيثر"
-  },
-  "getEtherFromFaucet": {
-    "message": "احصل على الأثير من صنبور مقابل $1",
-    "description": "Displays network name for Ether faucet"
   },
   "goerli": {
     "message": "شبكة اختبار Goerli "
@@ -406,12 +348,6 @@
   "invalidAddressRecipient": {
     "message": "عنوان المستلم غير صحيح"
   },
-  "invalidAddressRecipientNotEthNetwork": {
-    "message": "لا تجعلها شبكة ETH، قم بتعيين الأحرف صغيرة"
-  },
-  "invalidBlockExplorerURL": {
-    "message": "غير صحيح Block Explorer رابط"
-  },
   "invalidRPC": {
     "message": "رابط آر بي سي غير صحيح"
   },
@@ -436,6 +372,9 @@
   },
   "likeToImportTokens": {
     "message": "هل ترغب في إضافة هذه الرموز؟"
+  },
+  "lineaGoerli": {
+    "message": "شبكة اختبار Linea Goerli"
   },
   "links": {
     "message": "الروابط"
@@ -469,9 +408,6 @@
   },
   "mustSelectOne": {
     "message": "يجب تحديد عملة رمزية واحدة على الأقل."
-  },
-  "myAccounts": {
-    "message": "حساباتي"
   },
   "needImportFile": {
     "message": "يلزم تحديد ملف للاستيراد.",
@@ -507,9 +443,6 @@
   },
   "next": {
     "message": "التالي"
-  },
-  "noAddressForName": {
-    "message": "لم يتم تعيين عنوان لهذا الاسم."
   },
   "noConversionRateAvailable": {
     "message": "لا يوجد معدل تحويل متاح"
@@ -572,12 +505,6 @@
   "prev": {
     "message": "السابق"
   },
-  "primaryCurrencySetting": {
-    "message": "العملة الأساسية"
-  },
-  "primaryCurrencySettingDescription": {
-    "message": "حدد خيار \"المحلية\" لتحديد أولويات عرض القيم بالعملة المحلية للسلسلة (مثلاً ETH). حدد Fiat لتحديد أولويات عرض القيم بعملات fiat المحددة الخاصة بك."
-  },
   "privacyMsg": {
     "message": "سياسة الخصوصية"
   },
@@ -591,17 +518,8 @@
   "privateNetwork": {
     "message": "شبكة خاصة"
   },
-  "queue": {
-    "message": "اللائحة"
-  },
   "readdToken": {
     "message": "يمكنك إضافة هذه العملة الرمزية مرة أخرى في المستقبل من خلال الانتقال إلى \"إضافة عملة رمزية\" في قائمة خيارات الحسابات الخاصة بك."
-  },
-  "recents": {
-    "message": "الحديث"
-  },
-  "recipientAddressPlaceholder": {
-    "message": "البحث، العنوان العام (0x)، أو ENS"
   },
   "reject": {
     "message": "رفض"
@@ -661,12 +579,6 @@
   "search": {
     "message": "البحث"
   },
-  "searchResults": {
-    "message": "نتائج البحث"
-  },
-  "searchTokens": {
-    "message": "البحث عن العملات الرمزية"
-  },
   "securityAndPrivacy": {
     "message": "الأمن والخصوصية"
   },
@@ -688,17 +600,8 @@
   "send": {
     "message": "إرسال"
   },
-  "sendTokens": {
-    "message": "إرسال عملات رمزية"
-  },
   "settings": {
     "message": "الإعدادات"
-  },
-  "showAdvancedGasInline": {
-    "message": "أدوات التحكم المتقدمة للغاز"
-  },
-  "showAdvancedGasInlineDescription": {
-    "message": "حدد هذا لإظهار سعر عملة جاس والحد من الضوابط مباشرة على شاشات الإرسال والتأكيد."
   },
   "showFiatConversionInTestnets": {
     "message": "عرض التحويل على Testnets"
@@ -711,9 +614,6 @@
   },
   "showHexDataDescription": {
     "message": "حدد هذا لإظهار حقل بيانات سداسي عشرية على شاشة الإرسال"
-  },
-  "showPrivateKeys": {
-    "message": "عرض المفاتيح الخاصة"
   },
   "sigRequest": {
     "message": "طلب التوقيع"
@@ -763,32 +663,8 @@
   "symbolBetweenZeroTwelve": {
     "message": "يجب أن يكون الرمز 11 حرفًا أو أقل."
   },
-  "syncWithMobile": {
-    "message": "مزامنة مع الهاتف المحمول"
-  },
-  "syncWithMobileBeCareful": {
-    "message": "تأكد من عدم قيام أي شخص آخر بالنظر إلى شاشتك عند مسح هذا الرمز"
-  },
-  "syncWithMobileComplete": {
-    "message": "تمت مزامنة بياناتك بنجاح. استمتع بتطبيق MetaMask للهاتف المحمول!"
-  },
-  "syncWithMobileDesc": {
-    "message": "يمكنك مزامنة حساباتك ومعلوماتك مع جهازك المحمول. افتح تطبيق MetaMask على الجهاز المحمول وانتقل إلى \"الإعدادات\" ثم انقر على \"المزامنة من إضافة المتصفح\""
-  },
-  "syncWithMobileDescNewUsers": {
-    "message": "إذا قمت للتوّ بفتح تطبيق MetaMask للهواتف المحمولة لأول مرة، فاتبع الخطوات الموجودة في هاتفك."
-  },
-  "syncWithMobileScanThisCode": {
-    "message": "امسح هذا الرمز ضوئياً باستخدام تطبيق MetaMask للهواتف المحمولة"
-  },
-  "syncWithMobileTitle": {
-    "message": "المزامنة مع الجهاز المحمول"
-  },
   "terms": {
     "message": "شروط الاستخدام"
-  },
-  "testFaucet": {
-    "message": "اختبار Faucet"
   },
   "tips": {
     "message": "المكافآت"
@@ -853,21 +729,11 @@
   "transfer": {
     "message": "تحويل"
   },
-  "transferBetweenAccounts": {
-    "message": "التحويل بين حساباتي"
-  },
   "transferFrom": {
     "message": "التحويل من"
   },
-  "troubleTokenBalances": {
-    "message": "واجهتنا مشكلة في تحميل أرصدتك من العملات الرمزية. يمكنك الاطلاع عليها",
-    "description": "Followed by a link (here) to view token balances"
-  },
   "tryAgain": {
     "message": "إعادة المحاولة"
-  },
-  "typePassword": {
-    "message": "أدخل كلمة مرور MetaMask الخاصة بك"
   },
   "unapproved": {
     "message": "تم الرفض"
@@ -877,12 +743,6 @@
   },
   "unknown": {
     "message": "غير معروف"
-  },
-  "unknownCameraError": {
-    "message": "حدث خطأ أثناء محاولة الوصول إلى الكاميرا. يُرجى إعادة المحاولة..."
-  },
-  "unknownCameraErrorTitle": {
-    "message": "عذرًا! وقع خطأٌ ما..."
   },
   "unknownNetwork": {
     "message": "شبكة خاصة مجهولة"
@@ -896,9 +756,6 @@
   "unlockMessage": {
     "message": "شبكة الويب اللامركزية بانتظارك"
   },
-  "updatedWithDate": {
-    "message": "تم تحديث $1"
-  },
   "urlErrorMsg": {
     "message": "تتطلب الروابط بادئة HTTP/HTTPS مناسبة."
   },
@@ -908,9 +765,6 @@
   "userName": {
     "message": "اسم المستخدم"
   },
-  "viewAccount": {
-    "message": "عرض حساب"
-  },
   "viewContact": {
     "message": "عرض جهة الاتصال"
   },
@@ -919,9 +773,6 @@
   },
   "welcomeBack": {
     "message": "نرحب بعودتك!"
-  },
-  "yesLetsTry": {
-    "message": "نعم، دعنا نجرب"
   },
   "youNeedToAllowCameraAccess": {
     "message": "أنت بحاجة إلى السماح بالوصول إلى الكاميرا لاستخدام هذه الميزة."

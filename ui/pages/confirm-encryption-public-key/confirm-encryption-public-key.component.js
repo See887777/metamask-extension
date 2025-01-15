@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import log from 'loglevel';
 
 import AccountListItem from '../../components/app/account-list-item';
 import Identicon from '../../components/ui/identicon';
 import { PageContainerFooter } from '../../components/ui/page-container';
 
-import { EVENT } from '../../../shared/constants/metametrics';
+import { MetaMetricsEventCategory } from '../../../shared/constants/metametrics';
 import SiteOrigin from '../../components/ui/site-origin';
 import { Numeric } from '../../../shared/modules/Numeric';
 import { EtherDenomination } from '../../../shared/constants/common';
@@ -25,7 +26,6 @@ export default class ConfirmEncryptionPublicKey extends Component {
     clearConfirmTransaction: PropTypes.func.isRequired,
     cancelEncryptionPublicKey: PropTypes.func.isRequired,
     encryptionPublicKey: PropTypes.func.isRequired,
-    conversionRate: PropTypes.number,
     history: PropTypes.object.isRequired,
     requesterAddress: PropTypes.string,
     txData: PropTypes.object,
@@ -69,7 +69,6 @@ export default class ConfirmEncryptionPublicKey extends Component {
 
   renderBalance = () => {
     const {
-      conversionRate,
       nativeCurrency,
       fromAccount: { balance },
     } = this.props;
@@ -80,9 +79,10 @@ export default class ConfirmEncryptionPublicKey extends Component {
       16,
       EtherDenomination.WEI,
     )
-      .applyConversionRate(conversionRate)
+      .toDenomination(EtherDenomination.ETH)
       .round(6)
-      .toBase(10);
+      .toBase(10)
+      .toString();
 
     return (
       <div className="request-encryption-public-key__balance">
@@ -169,7 +169,7 @@ export default class ConfirmEncryptionPublicKey extends Component {
         onCancel={async (event) => {
           await cancelEncryptionPublicKey(txData, event);
           trackEvent({
-            category: EVENT.CATEGORIES.MESSAGES,
+            category: MetaMetricsEventCategory.Messages,
             event: 'Cancel',
             properties: {
               action: 'Encryption public key Request',
@@ -182,7 +182,7 @@ export default class ConfirmEncryptionPublicKey extends Component {
         onSubmit={async (event) => {
           await encryptionPublicKey(txData, event);
           this.context.trackEvent({
-            category: EVENT.CATEGORIES.MESSAGES,
+            category: MetaMetricsEventCategory.Messages,
             event: 'Confirm',
             properties: {
               action: 'Encryption public key Request',
@@ -197,6 +197,11 @@ export default class ConfirmEncryptionPublicKey extends Component {
   };
 
   render = () => {
+    if (!this.props.txData) {
+      log.warn('ConfirmEncryptionPublicKey Page: Missing txData prop.');
+      return null;
+    }
+
     return (
       <div className="request-encryption-public-key__container">
         {this.renderHeader()}

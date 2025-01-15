@@ -1,9 +1,15 @@
+@use "design-system";
+
 .onboarding-metametrics {
-  @include screen-sm-min {
+  @include design-system.screen-sm-min {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  p {
+    align-self: baseline;
   }
 
   ul {
@@ -20,22 +26,6 @@
     }
   }
 
-  .fa {
-    width: 16px;
-  }
-
-  .fa-check {
-    margin-inline-end: 12px;
-    color: var(--color-success-default);
-    padding-top: 2px;
-  }
-
-  .fa-times {
-    margin-inline-end: 12px;
-    color: var(--color-error-default);
-    padding-top: 3px;
-  }
-
   &__terms a {
     color: var(--color-primary-default);
   }
@@ -43,17 +33,13 @@
   &__buttons {
     margin-top: 24px;
 
-    @include screen-sm-min {
+    @include design-system.screen-sm-min {
       margin-top: 40px;
     }
 
     button {
       margin-bottom: 24px;
       width: 50%;
-
-      @include screen-sm-min {
-        width: 200px;
-      }
     }
   }
 }

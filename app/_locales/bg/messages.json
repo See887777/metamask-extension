@@ -75,15 +75,6 @@
   "asset": {
     "message": "Актив"
   },
-  "attemptToCancel": {
-    "message": "Опит за отказ?"
-  },
-  "attemptToCancelDescription": {
-    "message": "Подаването на този опит не гарантира, че първоначалната транзакция ще бъде анулирана. Ако опитът за анулиране е успешен, ще ви бъде начислена таксата за транзакцията по-горе."
-  },
-  "attemptingConnect": {
-    "message": "Опит за свързване с blockchain."
-  },
   "attributions": {
     "message": "Функции"
   },
@@ -98,9 +89,6 @@
   },
   "back": {
     "message": "Назад"
-  },
-  "backToAll": {
-    "message": "Назад към всички"
   },
   "backupApprovalInfo": {
     "message": "Този секретен код е необходим за възстановяване на портфейла ви, в случай че загубите устройството си, забравите паролата си, трябва да инсталирате отново MetaMask или искате да получите достъп до портфейла си на друго устройство."
@@ -130,20 +118,11 @@
   "browserNotSupported": {
     "message": "Браузърът ви не се поддържа ..."
   },
-  "buyWithWyre": {
-    "message": "Купете $1 с Wyre"
-  },
-  "buyWithWyreDescription": {
-    "message": "Wyre ви позволява да използвате кредитна карта, за да депозирате $1 право във вашата MetaMask сметка."
-  },
   "bytes": {
     "message": "Байта"
   },
   "cancel": {
     "message": "Отказ"
-  },
-  "cancellationGasFee": {
-    "message": "Такса в газ за анулиране "
   },
   "cancelled": {
     "message": "Отменен"
@@ -169,20 +148,17 @@
   "connect": {
     "message": "Свързване"
   },
-  "connectHardwareWallet": {
-    "message": "Свържете хардуерен портфейл"
-  },
   "connectingTo": {
     "message": "Свързване с $1"
   },
   "connectingToGoerli": {
     "message": "Свързване с тестова мрежа на Goerli"
   },
+  "connectingToLineaGoerli": {
+    "message": "Свързване с тестова мрежа на Linea Goerli"
+  },
   "connectingToMainnet": {
     "message": "Свързване с главната мрежа Ethereum"
-  },
-  "continueToWyre": {
-    "message": "Продължете към Wyre"
   },
   "contractDeployment": {
     "message": "Разгръщане на договор"
@@ -196,9 +172,6 @@
   "copyAddress": {
     "message": "Копирайте адреса в клипборда"
   },
-  "copyPrivateKey": {
-    "message": "Това е Вашият личен ключ (кликнете, за да го копирате)"
-  },
   "copyToClipboard": {
     "message": "Копиране в буферната памет"
   },
@@ -207,9 +180,6 @@
   },
   "create": {
     "message": "Създаване"
-  },
-  "createAccount": {
-    "message": "Създай акаунт"
   },
   "createPassword": {
     "message": "Създаване на парола"
@@ -235,15 +205,6 @@
   "delete": {
     "message": "Изтриване"
   },
-  "deleteAccount": {
-    "message": "Изтриване на акаунт"
-  },
-  "deleteNetwork": {
-    "message": "Да се изтрие ли мрежата?"
-  },
-  "deleteNetworkDescription": {
-    "message": "Наистина ли искате да изтриете тази мрежа?"
-  },
   "details": {
     "message": "Подробности"
   },
@@ -265,15 +226,6 @@
   "editContact": {
     "message": "Редактиране на контакт"
   },
-  "ensNotFoundOnCurrentNetwork": {
-    "message": "Името на ENS не е намерено в текущата мрежа. Опитайте да преминете към основната мрежа на етереум."
-  },
-  "ensRegistrationError": {
-    "message": "Грешка при регистрацията на име на ENS"
-  },
-  "enterPassword": {
-    "message": "Въведете парола"
-  },
   "enterPasswordContinue": {
     "message": "Въведете парола, за да продължите"
   },
@@ -285,9 +237,6 @@
   },
   "expandView": {
     "message": "Разгъване на изглед"
-  },
-  "exportPrivateKey": {
-    "message": "Експортиране на частен ключ"
   },
   "failed": {
     "message": "Неуспешно"
@@ -331,13 +280,6 @@
   },
   "general": {
     "message": "Общ"
-  },
-  "getEther": {
-    "message": "Вземете етер"
-  },
-  "getEtherFromFaucet": {
-    "message": "Вземете Ether от фосет за $1",
-    "description": "Displays network name for Ether faucet"
   },
   "goerli": {
     "message": "Тестова мрежа на Goerli"
@@ -402,12 +344,6 @@
   "invalidAddressRecipient": {
     "message": "Адресът на получателя е невалиден"
   },
-  "invalidAddressRecipientNotEthNetwork": {
-    "message": "Не е ETH мрежа, задаване на малки букви"
-  },
-  "invalidBlockExplorerURL": {
-    "message": "Невалиден Block Explorer URL адрес"
-  },
   "invalidRPC": {
     "message": "Невалиден RPC URL адрес"
   },
@@ -432,6 +368,9 @@
   },
   "likeToImportTokens": {
     "message": "Искате ли да добавите тези жетони?"
+  },
+  "lineaGoerli": {
+    "message": "Тестова мрежа на Linea Goerli"
   },
   "links": {
     "message": "Връзки"
@@ -469,9 +408,6 @@
   "mustSelectOne": {
     "message": "Трябва да изберете поне 1 жетон."
   },
-  "myAccounts": {
-    "message": "Моите акаунти"
-  },
   "needImportFile": {
     "message": "Трябва да изберете файл за импортиране.",
     "description": "User is important an account and needs to add a file to continue"
@@ -506,9 +442,6 @@
   },
   "next": {
     "message": "Напред"
-  },
-  "noAddressForName": {
-    "message": "За това име не е зададен адрес."
   },
   "noConversionRateAvailable": {
     "message": "Няма наличен процент на преобръщане"
@@ -571,12 +504,6 @@
   "prev": {
     "message": "Предишен"
   },
-  "primaryCurrencySetting": {
-    "message": "Основна валута"
-  },
-  "primaryCurrencySettingDescription": {
-    "message": "Изберете местна, за да приоритизирате показването на стойности в основната валута на веригата (например ETH). Изберете Fiat, за да поставите приоритет на показването на стойности в избраната от вас fiat валута."
-  },
   "privacyMsg": {
     "message": "Политика за поверителност"
   },
@@ -590,17 +517,8 @@
   "privateNetwork": {
     "message": "Частна мрежа"
   },
-  "queue": {
-    "message": "Опашка"
-  },
   "readdToken": {
     "message": "Можете да добавите този жетон в бъдеще, като отидете на „Добавяне на жетон“ в менюто с опции на акаунти."
-  },
-  "recents": {
-    "message": "Скорошни"
-  },
-  "recipientAddressPlaceholder": {
-    "message": "Търсене, публичен адрес (0x) или ENS"
   },
   "reject": {
     "message": "Отхвърляне"
@@ -660,12 +578,6 @@
   "search": {
     "message": "Търсене"
   },
-  "searchResults": {
-    "message": "Резултати от търсенето"
-  },
-  "searchTokens": {
-    "message": "Търсене на маркери"
-  },
   "securityAndPrivacy": {
     "message": "Сигурност и поверителност"
   },
@@ -687,17 +599,8 @@
   "send": {
     "message": "Изпращане"
   },
-  "sendTokens": {
-    "message": "Изпращане на жетони"
-  },
   "settings": {
     "message": "Настройки"
-  },
-  "showAdvancedGasInline": {
-    "message": "Разширено управление на газа"
-  },
-  "showAdvancedGasInlineDescription": {
-    "message": "Изберете това, за да покажете цените на газа и ограничите контрола директно на екраните за изпращане и потвърждение."
   },
   "showFiatConversionInTestnets": {
     "message": "Показване на преобразуването на Testnets"
@@ -710,9 +613,6 @@
   },
   "showHexDataDescription": {
     "message": "Изберете това, за да се покаже полето с шестнадесетични данни на екрана за изпращане"
-  },
-  "showPrivateKeys": {
-    "message": "Показване на частни ключове"
   },
   "sigRequest": {
     "message": "Заявка за подпис"
@@ -762,32 +662,8 @@
   "symbolBetweenZeroTwelve": {
     "message": "Символът трябва да е 11 символа или по-малко."
   },
-  "syncWithMobile": {
-    "message": "Синхронизиране с мобилни устройства"
-  },
-  "syncWithMobileBeCareful": {
-    "message": "Уверете се, че никой друг не гледа екрана ви, когато сканирате този код"
-  },
-  "syncWithMobileComplete": {
-    "message": "Вашите данни са синхронизирани успешно. Насладете се на мобилното приложение MetaMask!"
-  },
-  "syncWithMobileDesc": {
-    "message": "Можете да синхронизирате вашите акаунти и информация с мобилното си устройство. Отворете мобилното приложение MetaMask, отидете на „Настройки“ и докоснете „Синхронизиране от разширението на браузъра“"
-  },
-  "syncWithMobileDescNewUsers": {
-    "message": "Ако отворите приложението MetaMask Mobile за първи път, просто следвайте стъпките в телефона си."
-  },
-  "syncWithMobileScanThisCode": {
-    "message": "Сканирайте този код с вашето мобилно приложение MetaMask"
-  },
-  "syncWithMobileTitle": {
-    "message": "Синхронизиране с мобилни устройства"
-  },
   "terms": {
     "message": "Условия за ползване"
-  },
-  "testFaucet": {
-    "message": "Тест Faucet"
   },
   "tips": {
     "message": "Дарения"
@@ -852,21 +728,11 @@
   "transfer": {
     "message": "Трансфер"
   },
-  "transferBetweenAccounts": {
-    "message": "Прехвърляне между моите акаунти"
-  },
   "transferFrom": {
     "message": "Трансфер от"
   },
-  "troubleTokenBalances": {
-    "message": "Имахме проблеми със зареждането на вашите символи. Можете да ги видите",
-    "description": "Followed by a link (here) to view token balances"
-  },
   "tryAgain": {
     "message": "Нов опит"
-  },
-  "typePassword": {
-    "message": "Въведете паролата си за MetaMask"
   },
   "unapproved": {
     "message": "Неодобрено"
@@ -876,12 +742,6 @@
   },
   "unknown": {
     "message": "Неизвестно"
-  },
-  "unknownCameraError": {
-    "message": "При опита за достъп до камерата Ви възникна грешка. Моля, опитайте отново..."
-  },
-  "unknownCameraErrorTitle": {
-    "message": "Упс! Нещо се обърка...."
   },
   "unknownNetwork": {
     "message": "Неизвестна частна мрежа"
@@ -895,9 +755,6 @@
   "unlockMessage": {
     "message": "Децентрализираната мрежа очаква"
   },
-  "updatedWithDate": {
-    "message": "Актуализирано $1 "
-  },
   "urlErrorMsg": {
     "message": "URI изискват съответния HTTP / HTTPS префикс."
   },
@@ -907,9 +764,6 @@
   "userName": {
     "message": "Потребителско име"
   },
-  "viewAccount": {
-    "message": "Преглед на профила"
-  },
   "viewContact": {
     "message": "Преглед на контакта"
   },
@@ -918,9 +772,6 @@
   },
   "welcomeBack": {
     "message": "Добре дошли отново!"
-  },
-  "yesLetsTry": {
-    "message": "Да, нека опитаме"
   },
   "youNeedToAllowCameraAccess": {
     "message": "Трябва да разрешите достъпа на камерата, за да използвате тази функция."

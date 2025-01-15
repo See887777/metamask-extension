@@ -113,9 +113,6 @@
   "privacyMsg": {
     "message": "Política de Privacidade"
   },
-  "queue": {
-    "message": "Fila"
-  },
   "reject": {
     "message": "Rejeitar"
   },
@@ -157,9 +154,6 @@
   },
   "userName": {
     "message": "Nome de utilizador"
-  },
-  "viewAccount": {
-    "message": "Ver Conta"
   },
   "welcomeBack": {
     "message": "Bem-vindo de volta!"

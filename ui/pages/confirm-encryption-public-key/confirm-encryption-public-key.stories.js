@@ -65,8 +65,7 @@ export default {
     },
   },
   args: {
-    fromAccount: metamask.accountArray[0],
-    conversionRate: metamask.conversionRate,
+    fromAccount: Object.values(metamask.internalAccounts.accounts)[0],
     history: {
       push: action('history.push()'),
     },
@@ -75,6 +74,8 @@ export default {
     subjectMetadata: metamask.subjectMetadata,
     mostRecentOverviewPage: history.mostRecentOverviewPage,
     nativeCurrency: metamask.nativeCurrency,
+    currentCurrency: metamask.currentCurrency,
+    conversionRate: metamask.conversionRate,
   },
 };
 
